@@ -18,6 +18,9 @@ typedef enum {
   DUV_SIGNAL,
   DUV_PROCESS,
   DUV_TCP,
+#ifdef TLS
+  DUV_TLS,
+#endif //TLS
   DUV_PIPE,
   DUV_TTY,
   DUV_UDP,
@@ -36,6 +39,9 @@ typedef enum {
     1 << DUV_SIGNAL |
     1 << DUV_PROCESS |
     1 << DUV_TCP |
+#ifdef TLS
+    1 << DUV_TLS |
+#endif // TLS
     1 << DUV_PIPE |
     1 << DUV_TTY |
     1 << DUV_UDP |
@@ -49,7 +55,12 @@ typedef enum {
   DUV_POLL_MASK = 1 << DUV_POLL,
   DUV_SIGNAL_MASK = 1 << DUV_SIGNAL,
   DUV_PROCESS_MASK = 1 << DUV_PROCESS,
-  DUV_STREAM_MASK = 1 << DUV_TCP | 1 << DUV_PIPE | 1 << DUV_TTY,
+#ifdef TLS
+  DUV_STREAM_MASK = 1 << DUV_TCP | 1 << DUV_PIPE | 1 << DUV_TTY | 1 << DUV_UDP | 1 << DUV_TLS,
+  DUV_TLS_MASK = 1 << DUV_TLS,
+#else
+  DUV_STREAM_MASK = 1 << DUV_TCP | 1 << DUV_PIPE | 1 << DUV_TTY | 1 << DUV_UDP,
+#endif // TLS
   DUV_TCP_MASK = 1 << DUV_TCP,
   DUV_PIPE_MASK = 1 << DUV_PIPE,
   DUV_TTY_MASK = 1 << DUV_TTY,
